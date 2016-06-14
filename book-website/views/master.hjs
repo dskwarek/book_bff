@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body>
+<header>HEADER</header>
+{{$content}}
+{{/content}}
+<footer>FOOTER</footer>
+</body>
+</html>

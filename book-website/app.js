@@ -37,9 +37,12 @@ app.get('/book/:isbn?', function(req, res, next) {
         .then(function (result) {
       var book = JSON.parse(result.body);
       if (book.items) {
-        res.render('cover', {
-          title: jp.query(book.items,'$..title'),
-          cover: jp.query(book.items,'$..thumbnail'),
+        res.render('book', {
+          title: jp.value(book.items,'$..title'),
+          cover: jp.value(book.items,'$..thumbnail'),
+          partials: {
+            layout: 'master'
+          }
         });
       } else {
         res.render('error', {message: "Not found: " + req.params.isbn});
