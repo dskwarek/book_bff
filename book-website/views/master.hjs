@@ -4,6 +4,6 @@
 <esi:include src="https://kwasniew.github.io/menu.html" />
 {{$content}}
 {{/content}}
-<esi:include src="https://kwasniew.github.io/footer.html" />
+<esi:include src="https://kwasniew.github.io/footer123.html" />
 </body>
 </html>
