@@ -47,6 +47,7 @@ app.get('/book/:isbn?', function(req, res, next) {
         res.render('book', {
           title: jp.value(book.items,'$..title'),
           cover: jp.value(book.items,'$..thumbnail'),
+          isbn: req.params.isbn,
           partials: {
             layout: 'master'
           }

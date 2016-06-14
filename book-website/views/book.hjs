@@ -2,5 +2,8 @@
 {{$content}}
 <img src="{{cover}}">
 <div>{{title}}</div>
+<div>
+    <esi:include src="https://bok-inventory.herokuapp.com/stock/{{isbn}}" />
+</div>
 {{/content}}
 {{/layout}}
