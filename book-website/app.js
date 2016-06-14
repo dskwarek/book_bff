@@ -10,6 +10,8 @@ var users = require('./routes/users');
 
 var goodGuyLib = require('good-guy-http')({maxRetiries: 3});
 
+var jp = require('jsonpath');
+
 var app = express();
 
 // view engine setup
@@ -33,12 +35,11 @@ app.get('/book/:isbn?', function(req, res, next) {
     
     goodGuyLib('https://book-catalog-proxy-1.herokuapp.com/book?isbn=' + req.params.isbn)
         .then(function (result) {
-      console.log(result);
-      var books = JSON.parse(result.body);
-      if (books.items) {
+      var book = JSON.parse(result.body);
+      if (book.items) {
         res.render('cover', {
-          title: books.items[0].volumeInfo.title,
-          cover: books.items[0].volumeInfo.imageLinks.thumbnail
+          title: jp.query(book.items,'$..title'),
+          cover: jp.query(book.items,'$..thumbnail'),
         });
       } else {
         res.render('error', {message: "Not found: " + req.params.isbn});
