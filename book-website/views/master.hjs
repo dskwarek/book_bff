@@ -13,7 +13,6 @@
         var url = tag.attr('href');
         $.get( url, function( data ) {
             tag.replaceWith(data);
-            alert( "Load was performed." );
         });
     });
 </script>
