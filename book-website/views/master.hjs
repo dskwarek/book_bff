@@ -1,9 +1,9 @@
 <html>
 <head></head>
 <body>
-<header>HEADER</header>
+<esi:include src="https://kwasniew.github.io/menu.html" />
 {{$content}}
 {{/content}}
-<footer>FOOTER</footer>
+<esi:include src="https://kwasniew.github.io/footer.html" />
 </body>
 </html>

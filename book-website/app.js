@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var goodGuyLib = require('good-guy-http')({maxRetiries: 3});
 
 var jp = require('jsonpath');
+var middleware = require('nodesi').middleware;
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.set('view engine', 'hjs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(middleware());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
