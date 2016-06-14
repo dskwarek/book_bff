@@ -4,6 +4,17 @@
 <esi:include src="https://kwasniew.github.io/menu.html" />
 {{$content}}
 {{/content}}
-<esi:include src="https://kwasniew.github.io/footer.html" />
+<footer><a href="https://kwasniew.github.io/footer.html" class="include"></a></footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="  crossorigin="anonymous"></script>
+<script>
+    $(function() {
+        var tag = $('.include');
+        var url = tag.attr('href');
+        $.get( url, function( data ) {
+            tag.replaceWith(data);
+            alert( "Load was performed." );
+        });
+    });
+</script>
 </html>
