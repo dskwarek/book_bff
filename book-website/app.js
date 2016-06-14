@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var request = require('request');
+var goodGuyLib = require('good-guy-http')({maxRetiries: 3});
 
 var app = express();
 
@@ -29,22 +29,23 @@ app.use('/users', users);
 
 app.get('/book/:isbn?', function(req, res, next) {
 
-  if(req.params.isbn)
-  {
-    request('https://book-catalog-proxy-1.herokuapp.com/book?isbn=' + req.params.isbn,function (err, result,body) {
-      console.log(body);
-      var books = JSON.parse(body);
-      if(books.items) {
+  if (req.params.isbn) {
+    
+    goodGuyLib('https://book-catalog-proxy-1.herokuapp.com/book?isbn=' + req.params.isbn)
+        .then(function (result) {
+      console.log(result);
+      var books = JSON.parse(result.body);
+      if (books.items) {
         res.render('cover', {
           title: books.items[0].volumeInfo.title,
           cover: books.items[0].volumeInfo.imageLinks.thumbnail
         });
-      }else {
-        res.render('error',{message: "Not found: " + req.params.isbn});
+      } else {
+        res.render('error', {message: "Not found: " + req.params.isbn});
       }
-    });
-  }else {
-    res.render('error',{message: "Id required!"});
+    }).catch(next);
+  } else {
+    res.render('error', {message: "Id required!"});
   }
 });
 
