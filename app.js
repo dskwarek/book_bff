@@ -20,6 +20,16 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
+app.use(function (req,res,next) {
+  var startAt = process.hrtime();
+  res.on('finish', function () {
+    var diff = process.hrtime(startAt);
+    var time = diff[0] * 1e3 + diff[1] * 1e-6;
+    console.log('Request time: ' + time + 'ms');
+  });
+  next();
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(middleware({
