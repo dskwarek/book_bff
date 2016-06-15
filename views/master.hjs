@@ -1,5 +1,7 @@
 <html>
-<head></head>
+<head>
+    <meta name="request_id" content="{{requestId}}">
+</head>
 <body>
 <esi:include src="https://kwasniew.github.io/menu.html" />
 {{$content}}

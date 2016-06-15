@@ -38,6 +38,13 @@ app.use('/users', users);
 
 app.get('/book/:isbn?', function(req, res, next) {
 
+  var requestId = req.headers['x-request-id'] || Math.random();
+  res.estiOptions = {
+    headers: {
+      "x-request-id": requestId
+    }
+  };
+
   if (req.params.isbn) {
     
     goodGuyLib('https://book-catalog-proxy-1.herokuapp.com/book?isbn=' + req.params.isbn)
@@ -48,6 +55,7 @@ app.get('/book/:isbn?', function(req, res, next) {
           title: jp.value(book.items,'$..title'),
           cover: jp.value(book.items,'$..thumbnail'),
           isbn: req.params.isbn,
+          requestId: requestId, 
           partials: {
             layout: 'master'
           }
