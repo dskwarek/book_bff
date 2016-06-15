@@ -41,7 +41,7 @@ app.get('/book/:isbn?', function(req, res, next) {
   var requestId = req.headers['x-request-id'] || Math.random();
   res.esiOptions = {
     headers: {
-      "x-request-id": requestId
+      'x-request-id': requestId
     }
   };
 
